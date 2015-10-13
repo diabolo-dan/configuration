@@ -1,0 +1,84 @@
+# Aliases for starting scrapers incl rlwrap with a different history for each scraper
+#
+alias sc_mbook='rlwrap --command-name mbook python ~/gpuppet/scrapers/line/mbooknew.py'
+alias sc_pin='rlwrap --command-name pin python ~/gpuppet/scrapers/line/pin_api.py'
+alias sc_ibc='rlwrap --command-name ibc python ~/gpuppet/scrapers/line/ibc.py'
+alias sc_sbo='rlwrap --command-name sbo python ~/gpuppet/scrapers/line/sbo_website.py'
+alias sc_isn='rlwrap --command-name isn python ~/gpuppet/scrapers/line/isn.py'
+alias sc_bdaq='rlwrap --command-name bdaq python ~/gpuppet/scrapers/line/bdaq_soap.py'
+alias sc_cmd='rlwrap --command-name cmd python ~/gpuppet/scrapers/line/cmdbet.py'
+alias sc_espn='rlwrap --command-name espn python ~/gpuppet/scrapers/line/espn.py'
+alias sc_sboapi='rlwrap --command-name sboapi python ~/gpuppet/scrapers/line/sboapi.py'
+alias sc_seabet='rlwrap --command-name seabet python ~/gpuppet/scrapers/line/seabet.py'
+alias sc_vegus='rlwrap --command-name vegus python ~/gpuppet/scrapers/line/vegus.py'
+alias sc_sing2='rlwrap --command-name sing2 python ~/gpuppet/scrapers/line/sing2.py'
+alias sc_sv='rlwrap --command-name sv python ~/gpuppet/scrapers/line/sv.py'
+alias sc_foo='rlwrap --command-name foo python ~/gpuppet/scrapers/line/foobet.py'
+
+alias ack='ack-grep'
+
+
+#Don't really care about the stuff below
+# Some useful aliases.
+alias texclean='rm -f *.toc *.aux *.log *.cp *.fn *.tp *.vr *.pg *.ky'
+alias clean='echo -n "Really clean this directory?";
+	read yorn;
+	if test "$yorn" = "y"; then
+	   rm -f \#* *~ .*~ *.bak .*.bak  *.tmp .*.tmp core a.out;
+	   echo "Cleaned.";
+	else
+	   echo "Not cleaned.";
+	fi'
+alias h='history'
+alias j="jobs -l"
+alias l="ls -l "
+alias ll="ls -l"
+alias ls="ls -F"
+alias pu="pushd"
+alias po="popd"
+
+#
+# Csh compatability:
+#
+alias unsetenv=unset
+function setenv () {
+  export $1="$2"
+}
+
+# Function which adds an alias to the current shell and to
+# the ~/.bash_aliases file.
+add-alias ()
+{
+   local name=$1 value="$2"
+   echo alias $name=\'$value\' >>~/.bash_aliases
+   eval alias $name=\'$value\'
+   alias $name
+}
+
+# "repeat" command.  Like:
+#
+#	repeat 10 echo foo
+repeat ()
+{
+    local count="$1" i;
+    shift;
+    for i in $(_seq 1 "$count");
+    do
+        eval "$@";
+    done
+}
+
+# Subfunction needed by `repeat'.
+_seq ()
+{
+    local lower upper output;
+    lower=$1 upper=$2;
+
+    if [ $lower -ge $upper ]; then return; fi
+    while [ $lower -lt $upper ];
+    do
+	echo -n "$lower "
+        lower=$(($lower + 1))
+    done
+    echo "$lower"
+}
