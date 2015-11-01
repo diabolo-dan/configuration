@@ -34,7 +34,7 @@ set wildmode=longest:list,full
 " Ignore compiled files
 set wildignore=*.pyc,*.beam,*.so
 
-" Use middle click copy
+" Use middle click copy/paste
 set clipboard=unnamed
 " replace text with copied text
 nnoremap  S "_diwP
@@ -49,6 +49,7 @@ nnoremap <leader>z :set foldmethod=indent<CR>
 " fold/unfold with space
 nnoremap <space> za
 
+nnoremap <leader>j :! pdflatex %<CR>
 
 " Appearance
 set background=dark
