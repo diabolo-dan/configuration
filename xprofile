@@ -1,4 +1,3 @@
 #!/bin/bash
 setxkbmap -option caps:escape
-xrandr --output DisplayPort-0 --auto --right-of DVI-1 --output DVI-1 --auto --right-of DVI-0
 xset -b
