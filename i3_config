@@ -7,6 +7,15 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+#source xprofile
+exec --no-startup-id setxkbmap -option caps:escape
+
+#Setup networking
+exec --no-startup-id nm-applet
+
+#Better Power management
+exec --no-startup-id xfce4-power-manager
+
 #movement modifier
 set $mmod mod1
 #standard modifier
