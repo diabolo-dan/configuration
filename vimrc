@@ -1,3 +1,4 @@
+set t_Co=256
 let g:syntastic_python_checkers=['pylint']
 let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq=0
