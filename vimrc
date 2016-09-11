@@ -55,7 +55,7 @@ nnoremap <leader>j :! pdflatex %<CR>
 
 " Appearance
 set background=dark
-colo evening
+colo solarized
 ":highlight Normal ctermbg=black
 "  display tabs, trailing spaces
 set list
