@@ -13,6 +13,7 @@ setup_conf bashrc
 setup_conf vimrc
 setup_conf vim
 setup_conf xprofile
+setup_conf pylintrc
 
 find ~/.i3 -maxdepth 1 -name config -exec mv -n '{}' ~/.conf.bak/ ';' &&
 ln -s $(realpath i3_config) ~/.i3/config
