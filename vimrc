@@ -10,10 +10,11 @@ syntax on
 filetype on
 filetype plugin on
 " How many tabs
-set ts=3 "Length of tab
-set sw=3 "Length to shift (1 tab)
-set ai "Auto indent
-set ci "copy indent
+set tabstop=3 "Length of tab
+set softtabstop=3
+set shiftwidth=3 "Length to shift (1 tab)
+set autoindent "Auto indent
+set copyindent "copy indent
 set nu " line numbers
 
 "  Ignore case if all lowercase search.
