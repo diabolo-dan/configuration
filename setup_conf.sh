@@ -9,6 +9,8 @@ function setup_conf {
 	ln -s $(realpath $1) ~/.$1
 }
 
+git submodule init && git submodule update
+
 setup_conf bashrc
 setup_conf vimrc
 setup_conf vim
