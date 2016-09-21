@@ -16,6 +16,9 @@ exec --no-startup-id nm-applet
 #Better Power management
 exec --no-startup-id xfce4-power-manager
 
+#Bluetooth
+exec --no-startup-id blueman-applet
+
 #movement modifier
 set $mmod mod1
 #standard modifier
