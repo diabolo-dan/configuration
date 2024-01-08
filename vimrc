@@ -10,9 +10,13 @@ syntax on
 filetype on
 filetype plugin on
 " How many tabs
-set tabstop=3 "Length of tab
-set softtabstop=3
-set shiftwidth=3 "Length to shift (1 tab)
+" set tabstop=3 "Length of tab
+" set softtabstop=3
+" set shiftwidth=3 "Length to shift (1 tab)
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
 set autoindent "Auto indent
 set copyindent "copy indent
 set nu " line numbers
@@ -37,7 +41,8 @@ set wildmode=longest:list,full
 set wildignore=*.pyc,*.beam,*.so
 
 " Use middle click copy/paste
-set clipboard=unnamed
+set clipboard=unnamed,autoselect
+
 " replace text with copied text
 nnoremap  S "_diwP
 
@@ -60,6 +65,7 @@ colo solarized
 "  display tabs, trailing spaces
 set list
 set lcs=tab:>-,trail:@
+set listchars=tab:>-,trail:@
 
 
 "  Speed of common comands

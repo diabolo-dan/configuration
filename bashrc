@@ -2,8 +2,23 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+
+# If there are multiple matches for completion, Tab should cycle through them
+bind 'TAB:menu-complete'
+# And Shift-Tab should cycle backwards
+bind '"\e[Z": menu-complete-backward'
+
+# Display a list of the matching files
+bind "set show-all-if-ambiguous on"
+
+# Perform partial (common) completion on the first Tab press, only start
+# cycling full results on the second Tab press (from bash version 5)
+bind "set menu-complete-display-prefix on"
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+
+[[ $TERM != "screen" ]] && exec tmux
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -38,17 +53,13 @@ case "$TERM" in
 esac
 
 
-export PATH="$PATH:/home/danny/gpuppet/devboxbin:/home/danny/gpuppet/dumaclient/bin:/home/danny/gpuppet/dumabin"
-export DUMA_PATH="/home/danny/gpuppet/duma"
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
-export GAMBIT_PIN_DB_STRING='dbname=testduma user=danny'
-
-
-export DUMA_DSN='dbname=testduma'
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -128,3 +139,18 @@ shopt -s histappend
 shopt -s histverify
 set -o vi
 
+
+
+#kubectx and kubens
+export PATH=~/.kubectx:$PATH
+source <(kubectl completion bash)
+
+alias parquet="java -jar /home/danny/.m2/repository/org/apache/parquet/parquet-tools/1.12.0-SNAPSHOT/parquet-tools-1.12.0-SNAPSHOT.jar"
+export PYSPARK_DRIVER_PYTHON=ipython
+
+export CODE_ROOT=/home/danny/code
+
+export PATH="/home/danny/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+alias avro='java -jar Downloads/avro-tools-1.9.0.jar'

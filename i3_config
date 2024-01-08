@@ -8,7 +8,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 #source xprofile
-exec --no-startup-id setxkbmap -option caps:escape
+exec --no-startup-id setxkbmap -option caps:escape -option altwin:swap_lalt_lwin
 
 #Setup networking
 exec --no-startup-id nm-applet
@@ -20,9 +20,9 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id blueman-applet
 
 #movement modifier
-set $mmod mod1
+set $mmod mod4
 #standard modifier
-set $mod mod1
+set $mod mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -37,25 +37,92 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 workspace_auto_back_and_forth yes
-#workspace "1:mail" output DVI-0
-#workspace "1:recruitment" output DVI-1
-#workspace "1:bb" output DisplayPort-0
-#workspace "2:c" output DVI-1
-#workspace "2:r" output DisplayPort-0
-#workspace "3:c" output DVI-1
-#workspace "3:r" output DisplayPort-0
-#workspace "4:c" output DVI-1
-#workspace "4:r" output DisplayPort-0
-#workspace 5 output DVI-0
-#workspace 6 output DVI-1
-#workspace 7 output DisplayPort-0
-#workspace "8:asia" output DisplayPort-0
-#workspace "9:l" output DVI-0
-#workspace "9:c" output DVI-1
-#workspace "9:r" output DisplayPort-0
-#workspace "0:l" output DVI-0
-#workspace "0:c" output DVI-1
-#workspace "0:r" output DisplayPort-0
+#workspace "1:mail" output DP-3
+#workspace "1:slack" output eDP-1
+#workspace "2:lpycharm-run" output DP-1
+#workspace "2:rpycharm" output DP-3
+#workspace "3:gol" output DP-1
+#workspace "3:go" output DP-3
+#workspace "4:l" output DP-1
+#workspace "4:r" output DP-3
+#workspace 5 output eDP-1
+#workspace 6 output eDP-1
+#workspace 7 output DP-3
+#workspace "8:kube" output DP-3
+#workspace "9" output DP-1
+#workspace "0:l" output eDP-1
+#workspace "0:r" output DP-1
+#workspace "0:c" output DP-3
+
+
+set $laptop_monitor "eDP-1"
+set $centre_monitor "DP-3"
+set $left_monitor "DP-1"
+
+
+workspace "1:slack" output $laptop_monitor
+workspace 5 output $laptop_monitor
+workspace 6 output $laptop_monitor
+workspace "0:r" output $laptop_monitor
+
+workspace "2:lpycharm-run" output $left_monitor
+workspace "3:gol" output $left_monitor
+workspace "4:l" output $left_monitor
+workspace "9" output $left_monitor
+workspace "0:l" output $left_monitor
+
+workspace "1:mail" output $centre_monitor
+workspace "2:pycharm" output $centre_monitor
+workspace "3:go" output $centre_monitor
+workspace "4:c" output $centre_monitor
+workspace "7" output $centre_monitor
+workspace "8:kube" output $centre_monitor
+workspace "0:c" output $centre_monitor
+
+
+#workspace "1:slack" output eDP-1
+#workspace 5 output eDP-1
+#workspace 6 output eDP-1
+#workspace "0:l" output eDP-1
+#
+#workspace "2:lpycharm-run" output DVI-I-2-1
+#workspace "3:gol" output DVI-I-2-1
+#workspace "4:l" output DVI-I-2-1
+#workspace "9" output DVI-I-2-1
+#workspace "0:r" output DVI-I-2-1
+#
+#workspace "1:mail" output DVI-I-3-2
+#workspace "2:rpycharm" output DVI-I-3-2
+#workspace "3:go" output DVI-I-3-2
+#workspace "4:r" output DVI-I-3-2
+#workspace 7 output DVI-I-3-2
+#workspace "8:kube" output DVI-I-3-2
+#workspace "0:c" output DVI-I-3-2
+
+
+# switch to workspace
+bindsym $mod+1 workspace "1:slack"; workspace "1:mail"
+bindsym $mod+2 workspace "2:pycharm"; workspace "2:lpycharm-run"
+bindsym $mod+3 workspace "3:go"; workspace "3:gol"
+bindsym $mod+4 workspace "4:c"; workspace "4:l"
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace "8:kube"
+bindsym $mod+9 workspace "9"; workspace "9"
+bindsym $mod+0 workspace "0:l"; workspace "0:r"; workspace "0:c"
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace "1:mail"
+bindsym $mod+Shift+2 move container to workspace "2:lpycharm-run"
+bindsym $mod+Shift+3 move container to workspace "3:gol"
+bindsym $mod+Shift+4 move container to workspace "4:l"
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace "8:kube"
+bindsym $mod+Shift+9 move container to workspace "9:l"
+bindsym $mod+Shift+0 move container to workspace "0:l"
 
 #exec --no-startup-id xrandr --output DVI-1 --auto --left-of DVI-0
 
@@ -99,7 +166,7 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 
 bindsym $mod+d move workspace to output right
-bindsym $mod+x move workspace to output DVI-0
+bindsym $mod+x move workspace to output eDP-1
 # split in horizontal orientation
 bindsym $mmod+b split h
 
@@ -115,10 +182,10 @@ bindsym $mmod+w layout tabbed
 bindsym $mmod+e layout toggle split
 
 # toggle tiling / floating
-#bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-#bindsym $mod+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mmod+a focus parent
@@ -127,62 +194,43 @@ bindsym $mmod+a focus parent
 #bindsym $mod+d focus child
 
 
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 0
-
-# switch to workspace
-#bindsym $mod+1 workspace "1:recruitment"; workspace "1:bb"; workspace "1:mail"
-#bindsym $mod+2  workspace "2:r"; workspace "2:c"
-#bindsym $mod+3  workspace "3:r"; workspace "3:c"
-#bindsym $mod+4  workspace "4:r"; workspace "4:c"
+## switch to workspace
+#bindsym $mod+0 workspace 0
+#bindsym $mod+1 workspace 1
+#bindsym $mod+2 workspace 2
+#bindsym $mod+3 workspace 3
+#bindsym $mod+4 workspace 4
 #bindsym $mod+5 workspace 5
 #bindsym $mod+6 workspace 6
 #bindsym $mod+7 workspace 7
-#bindsym $mod+8 workspace "8:asia"
-#bindsym $mod+9 workspace "9:l"; workspace "9:r"; workspace "9:c"
-#bindsym $mod+0 workspace "0:l"; workspace "0:r"; workspace "0:c"
+#bindsym $mod+8 workspace 8
+#bindsym $mod+9 workspace 9
 #
 ## move focused container to workspace
-#bindsym $mod+Shift+1 move container to workspace "1:bb"
-#bindsym $mod+Shift+2 move container to workspace "2:c"
-#bindsym $mod+Shift+3 move container to workspace "3:c"
-#bindsym $mod+Shift+4 move container to workspace "4:c"
+#bindsym $mod+Shift+0 move container to workspace 0
+#bindsym $mod+Shift+1 move container to workspace 1
+#bindsym $mod+Shift+2 move container to workspace 2
+#bindsym $mod+Shift+3 move container to workspace 3
+#bindsym $mod+Shift+4 move container to workspace 4
 #bindsym $mod+Shift+5 move container to workspace 5
 #bindsym $mod+Shift+6 move container to workspace 6
 #bindsym $mod+Shift+7 move container to workspace 7
-#bindsym $mod+Shift+8 move container to workspace "8:asia"
-#bindsym $mod+Shift+9 move container to workspace "9:r"
-#bindsym $mod+Shift+0 move container to workspace "0:r"
+#bindsym $mod+Shift+8 move container to workspace 8
+#bindsym $mod+Shift+9 move container to workspace 9
+#bindsym $mod+Shift+0 move container to workspace 0
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $Mod4+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to shutdown?' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod1+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to shutdown?' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Lock screen
-bindsym mod4+l exec "i3lock"
-bindsym mod4+s exec "i3lock && systemctl suspend"
-bindsym mod4+Shift+q exec "systemctl poweroff"
+bindsym mod1+l exec "i3lock"
+#bindsym mod1+s exec "i3lock && systemctl suspend"
+bindsym mod1+s exec "i3lock"
+bindsym mod1+Shift+q exec "systemctl poweroff"
 
 
 bindsym mod1+Control+Delete exec "i3lock"
@@ -216,8 +264,8 @@ bindsym $mod+r mode "resize"
 
 
 #Volume control (over all sinks)'
-bindsym mod4+minus exec pactl list short sinks | awk '{print $1}' | xargs -Iq pactl set-sink-volume q -1dB
-bindsym mod4+plus exec pactl list short sinks | awk '{print $1}' | xargs -Iq pactl set-sink-volume q +1dB
+bindsym mod1+minus exec pactl list short sinks | awk '{print $1}' | xargs -Iq pactl set-sink-volume q -1dB
+bindsym mod1+plus exec pactl list short sinks | awk '{print $1}' | xargs -Iq pactl set-sink-volume q +1dB
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
